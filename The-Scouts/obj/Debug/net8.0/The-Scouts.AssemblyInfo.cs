@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("The-Scouts")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f7dcc994d33f0709c0605cbdcb77438260f3b0a")]
 [assembly: System.Reflection.AssemblyProductAttribute("The-Scouts")]
 [assembly: System.Reflection.AssemblyTitleAttribute("The-Scouts")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
