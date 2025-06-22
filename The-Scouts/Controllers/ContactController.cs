@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
@@ -21,6 +22,7 @@ namespace The_Scouts.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<IEnumerable<ContactMessageDto>>> GetAllMessages()
         {
             if (!_cache.TryGetValue(AllContactsCacheKey, out IEnumerable<ContactMessageDto> contacts))

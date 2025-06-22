@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/wwwroot/resumes/2c76bd7b-0b3b-4e3e-9556-7a337ce9f4bd.pdf",
+      "PackagePath": "staticwebassets/resumes/2c76bd7b-0b3b-4e3e-9556-7a337ce9f4bd.pdf"
+    },
+    {
+      "Id": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/wwwroot/resumes/7aceceb5-5158-4b17-afb6-49c8a84330c5.pdf",
+      "PackagePath": "staticwebassets/resumes/7aceceb5-5158-4b17-afb6-49c8a84330c5.pdf"
+    },
+    {
+      "Id": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/wwwroot/resumes/80096631-da40-4d16-b674-7d92f3e9eff9.pdf",
+      "PackagePath": "staticwebassets/resumes/80096631-da40-4d16-b674-7d92f3e9eff9.pdf"
+    },
+    {
+      "Id": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/wwwroot/resumes/cda58621-4b36-48a1-9e45-dd3ab1e8372a.pdf",
+      "PackagePath": "staticwebassets/resumes/cda58621-4b36-48a1-9e45-dd3ab1e8372a.pdf"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.The-Scouts.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.The-Scouts.props",
+      "PackagePath": "build\\The-Scouts.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.The-Scouts.props",
+      "PackagePath": "buildMultiTargeting\\The-Scouts.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.The-Scouts.props",
+      "PackagePath": "buildTransitive\\The-Scouts.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
