@@ -8,12 +8,9 @@ namespace MyProjectAPI.Mappings
     {
         public AutoMapperProfile()
         {
-            
             CreateMap<Job, JobDto>().ReverseMap();
-           
-            CreateMap<ApplicationDto, Application>();
-            
-            CreateMap<ContactMessageDto, ContactMessage>();
+            CreateMap<Application, ApplicationDto>().ReverseMap();
+            CreateMap<ContactMessage, ContactMessageDto>().ReverseMap();
         }
     }
 }
