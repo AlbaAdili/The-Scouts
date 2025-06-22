@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using The_Scouts.Repositories.Implementations;
 using The_Scouts.Repositories.Interfaces;
+using The_Scouts.Services.Implementations;
+using The_Scouts.Services.Interfaces;
 using TheScouts.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +21,9 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 
-
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 
 
 var app = builder.Build();

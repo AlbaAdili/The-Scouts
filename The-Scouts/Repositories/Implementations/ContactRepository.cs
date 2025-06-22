@@ -14,15 +14,13 @@ public class ContactRepository : IContactRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<ContactMessage>> GetAllAsync() =>
-        await _context.ContactMessages.ToListAsync();
+    public async Task<IEnumerable<ContactMessage>> GetAllAsync() => await _context.ContactMessages.ToListAsync();
 
-    public async Task<ContactMessage?> FindOneAsync(int id) =>
-        await _context.ContactMessages.FindAsync(id);
+    public async Task<ContactMessage?> FindOneAsync(int id) => await _context.ContactMessages.FindAsync(id);
 
-    public async Task AddAsync(ContactMessage contact)
+    public async Task AddAsync(ContactMessage message)
     {
-        _context.ContactMessages.Add(contact);
+        await _context.ContactMessages.AddAsync(message);
         await _context.SaveChangesAsync();
     }
 }
