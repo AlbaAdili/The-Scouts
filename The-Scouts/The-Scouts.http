@@ -1,0 +1,6 @@
+@The_Scouts_HostAddress = http://localhost:5185
+
+GET {{The_Scouts_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
