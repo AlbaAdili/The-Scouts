@@ -23,14 +23,21 @@ namespace The_Scouts.Controllers
         private readonly IApplicationService _applicationService;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IMemoryCache _cache;
-        private readonly string _cacheKey = "all_applications";
+        private readonly IWebHostEnvironment _environment;
+        private readonly string _cacheKey = "applications";
 
-        public ApplicationController(IApplicationService applicationService, UserManager<IdentityUser> userManager, IMemoryCache cache)
+        public ApplicationController(
+            IApplicationService applicationService,
+            UserManager<IdentityUser> userManager,
+            IMemoryCache cache,
+            IWebHostEnvironment environment)
         {
             _applicationService = applicationService;
             _userManager = userManager;
             _cache = cache;
+            _environment = environment;
         }
+
 
         [HttpPost]
         [Authorize]
@@ -46,8 +53,18 @@ namespace The_Scouts.Controllers
 
             if (dto.Resume == null || dto.Resume.Length == 0)
                 return BadRequest("Resume file is required.");
+            
+            var allowedExtensions = new[] { ".pdf", ".docx" };
+            var ext = Path.GetExtension(dto.Resume.FileName).ToLower();
 
-            var uploadsFolder = Path.Combine("Uploads", "Resumes");
+            if (!allowedExtensions.Contains(ext))
+                return BadRequest("Only PDF and DOCX files are allowed.");
+            
+            if (dto.Resume.Length > 5 * 1024 * 1024)
+                return BadRequest("Resume size must be under 5MB.");
+
+            // Save file under wwwroot/Resumes
+            var uploadsFolder = Path.Combine(_environment.WebRootPath, "Resumes");
             Directory.CreateDirectory(uploadsFolder);
 
             var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.Resume.FileName);
@@ -59,10 +76,11 @@ namespace The_Scouts.Controllers
             }
 
             await _applicationService.AddAsync(dto, user.Id, filePath);
-            _cache.Remove(_cacheKey);
+            _cache.Remove(_cacheKey); 
 
             return Ok("Application submitted successfully.");
         }
+    
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
