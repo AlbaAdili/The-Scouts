@@ -1,5 +1,6 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/appsettings.Development.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/appsettings.json
+/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/The-Scouts.staticwebassets.runtime.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/The-Scouts
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/The-Scouts.deps.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/The-Scouts.runtimeconfig.json
@@ -127,4 +128,3 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.pdb
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.genruntimeconfig.cache
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/ref/The-Scouts.dll
-/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/bin/Debug/net8.0/The-Scouts.staticwebassets.runtime.json

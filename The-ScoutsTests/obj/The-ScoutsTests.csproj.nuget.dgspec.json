@@ -4,14 +4,14 @@
     "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj": {}
   },
   "projects": {
-    "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj": {
+    "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/The-Scouts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj",
-        "projectName": "The-ScoutsTests",
-        "projectPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj",
+        "projectUniqueName": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/The-Scouts.csproj",
+        "projectName": "The-Scouts",
+        "projectPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/The-Scouts.csproj",
         "packagesPath": "/Users/alba/.nuget/packages/",
-        "outputPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/",
+        "outputPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/alba/.nuget/NuGet/NuGet.Config"
@@ -43,6 +43,137 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[9.0.5, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.407/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj",
+        "projectName": "The-ScoutsTests",
+        "projectPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/The-ScoutsTests.csproj",
+        "packagesPath": "/Users/alba/.nuget/packages/",
+        "outputPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alba/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/The-Scouts.csproj": {
+                "projectPath": "/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/The-Scouts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[9.0.0, )"
