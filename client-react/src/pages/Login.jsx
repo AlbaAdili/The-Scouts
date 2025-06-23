@@ -15,19 +15,54 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await axios.post('/api/auth/login', form);
-      localStorage.setItem('token', res.data.token);
+
+      const user = {
+        id: res.data.id,
+        email: res.data.email,
+        token: res.data.token,
+        role: res.data.role, // this assumes your backend returns role
+      };
+
+      localStorage.setItem('user', JSON.stringify(user));
+
       navigate('/');
+      window.location.reload(); // Ensures role-based UI refresh
     } catch (err) {
+      console.error(err);
       setError('Invalid credentials');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 space-y-4">
-      <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="Email" className="input" required />
-      <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Password" className="input" required />
-      <button type="submit" className="btn">Login</button>
-      {error && <p className="text-red-500">{error}</p>}
-    </form>
+    <div className="flex justify-center items-center h-screen bg-gray-50">
+      <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-sm space-y-4">
+        <h2 className="text-xl font-bold text-center">Login</h2>
+
+        <input
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Email"
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Password"
+          className="w-full p-2 border rounded"
+          required
+        />
+
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
+          Login
+        </button>
+
+        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+      </form>
+    </div>
   );
 }

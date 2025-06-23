@@ -1,23 +1,19 @@
-// src/api/axiosConfig.js
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "http://localhost:5185/api", // Your .NET backend URL
-  headers: {
-    "Content-Type": "application/json"
-  }
+  baseURL: 'http://localhost:5185/api',
 });
 
-// Automatically attach JWT token if it exists
-instance.interceptors.request.use(config => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+// Add the token to all requests automatically
+instance.interceptors.request.use(
+  config => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user?.token) {
+      config.headers.Authorization = `Bearer ${user.token}`;
+    }
+    return config;
+  },
+  error => Promise.reject(error)
+);
 
 export default instance;
-
-
-

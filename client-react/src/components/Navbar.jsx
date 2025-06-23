@@ -16,7 +16,6 @@ export default function Navbar() {
           <Link to="/faq" className="hover:text-black">FAQ</Link>
           <Link to="/jobs" className="hover:text-black">Jobs</Link>
           <Link to="/contact" className="hover:text-black">Contact</Link>
-          <Link to="/faq" className="hover:underline">FAQ</Link>
 
         </div>
 

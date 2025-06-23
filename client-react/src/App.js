@@ -11,6 +11,9 @@ import Register from "./pages/Register";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 import Faq from './pages/Faq';
+import AddJob from './pages/AddJob';
+import EditJob from './pages/EditJob';
+import AdminApplications from './pages/AdminApplications';
 
 
 
@@ -30,6 +33,9 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/jobs/add" element={<AddJob />} />
+          <Route path="/admin/jobs/:id/edit" element={<EditJob />} />
+          <Route path="/admin/applications" element={<AdminApplications />} />
         </Routes>
       </div>
     </Router>
