@@ -71,3 +71,53 @@ The application follows a **three-tier architecture**:
 - Track application status.
 
 ---
+
+##  How to Run the Project Locally
+
+### 1. Prerequisites
+- Node.js (v18 or later)
+- .NET SDK 8.0
+- PostgreSQL Server
+
+### 2. Backend Setup
+
+```bash
+cd The-Scouts.API
+dotnet restore
+dotnet ef database update
+dotnet run
+```
+
+### 3. Frontend Setup
+
+```bash
+cd client
+npm install
+npm start
+```
+
+### 4. Configuration
+Ensure your `.env` and `appsettings.json` are correctly configured for API and DB connection.
+
+---
+
+##  UI Mockups
+
+Non-functional design prototypes are provided in Figma. These mockups include:
+- Landing page
+- Job listing table
+- Application form
+- Admin dashboard
+- Login/Register interface
+
+
+---
+
+##  Testing
+
+- Manual functional testing using Postman and browser sessions.
+- Role-based scenario validation.
+- API endpoints tested for authentication, validation, and edge cases.
+
+---
+
