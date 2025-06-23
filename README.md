@@ -37,3 +37,37 @@ The primary goal is to bridge the gap between candidates seeking academic or pro
 - Database schema designed with relational integrity and indexing for performance
   
 ---
+
+##  System Architecture
+
+The application follows a **three-tier architecture**:
+
+```
+ Client (React)
+   ↕ Axios
+ API Server (ASP.NET Core)
+   ↕ EF Core
+ Database (PostgreSQL)
+```
+
+- **Authentication**: Implemented using ASP.NET Identity and JWT tokens.
+- **Authorization**: Role-based using claims (Admin, User).
+- **State Management**: Browser local storage for token persistence and session control.
+
+---
+
+##  User Roles and Functionalities
+
+###  Administrator (HR)
+- Create, edit, and delete job postings.
+- View and manage all applications.
+- Update application statuses.
+- Access dashboards for data overview.
+
+###  User (Applicant)
+- Register and login securely.
+- View job postings.
+- Submit applications for open positions.
+- Track application status.
+
+---
