@@ -17,3 +17,23 @@ The primary goal is to bridge the gap between candidates seeking academic or pro
 - Improve transparency and reduce administrative overhead in recruitment.
 
 ---
+
+## Technologies and Tools
+
+### Frontend
+- **React** (JavaScript library for building user interfaces)
+- **Tailwind CSS** (Utility-first CSS framework for modern styling)
+- **React Router** (Routing and navigation)
+- **Axios** (HTTP client for API communication)
+
+###  Backend
+- **ASP.NET Core Web API** (RESTful API framework)
+- **Entity Framework Core** (ORM for PostgreSQL)
+- **JWT** (JSON Web Token for secure authentication)
+- **Identity Framework** (Role and user management)
+
+###  Database
+- **PostgreSQL 15**
+- Database schema designed with relational integrity and indexing for performance
+  
+---
