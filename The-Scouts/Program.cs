@@ -81,7 +81,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://localhost:3000") // You can replace with your frontend domain
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
@@ -102,9 +102,13 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 
-// ====================== ROLE SEEDING ======================
+// ====================== APPLY MIGRATIONS ======================
 using (var scope = app.Services.CreateScope())
 {
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate(); // Apply migrations
+
+    // ====================== ROLE SEEDING ======================
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     string[] roles = { "User", "Admin" };
 
@@ -126,7 +130,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowReactApp"); // Enable CORS
+app.UseCors("AllowReactApp");
 
 app.UseAuthentication();
 app.UseAuthorization();
