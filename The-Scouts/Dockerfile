@@ -1,26 +1,29 @@
-﻿# Use the official .NET 8 SDK image to build and publish
+﻿# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+WORKDIR /src
 
 # Copy solution and project files
-COPY *.sln .
+COPY The-Scouts.sln ./
 COPY The-Scouts/The-Scouts.csproj ./The-Scouts/
 
 # Restore dependencies
-RUN dotnet restore
+RUN dotnet restore The-Scouts.sln
 
-# Copy the entire project and build
+# Copy the rest of the project files
 COPY . .
-WORKDIR /app/The-Scouts
+
+# Publish the application
+WORKDIR /src/The-Scouts
 RUN dotnet publish -c Release -o /app/publish
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Set port for Render
+# Set environment variables
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
+# Run the application
 ENTRYPOINT ["dotnet", "The-Scouts.dll"]
