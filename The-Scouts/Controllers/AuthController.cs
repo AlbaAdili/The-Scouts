@@ -62,14 +62,20 @@ namespace The_Scouts.Controllers
             if (userInDb is null)
                 return Unauthorized();
 
-            var accessToken = await _tokenService.CreateToken(userInDb);
+            var accessToken = await _tokenService.CreateToken(userInDb, request.RememberMe);
             await _context.SaveChangesAsync();
+            
+            var roles = await _userManager.GetRolesAsync(userInDb);
+            var userRole = roles.FirstOrDefault(); // assumes one role per user
+
 
             return Ok(new AuthResponseDTO
             {
                 Id = userInDb.Id,
                 Email = userInDb.UserName,
-                Token = accessToken
+                Token = accessToken,
+                Role = userRole
+                
             });
         }
     }

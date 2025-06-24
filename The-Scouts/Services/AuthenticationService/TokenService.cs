@@ -16,10 +16,12 @@ namespace The_Scouts.Services.AuthenticationService
             _userManager = userManager;
         }
 
-        private const int ExpirationMinutes = 30;
-        public async Task<string> CreateToken(IdentityUser user)
+        public async Task<string> CreateToken(IdentityUser user, bool rememberMe = false)
         {
-            var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
+            var expiration = rememberMe
+                ? DateTime.UtcNow.AddDays(30)   //  Long session if rememberMe is checked
+                : DateTime.UtcNow.AddMinutes(30); //  Default short session
+
             var roles = await _userManager.GetRolesAsync(user);
 
             var token = CreateJwtToken(
@@ -27,43 +29,39 @@ namespace The_Scouts.Services.AuthenticationService
                 CreateSigningCredentials(),
                 expiration
             );
+
             var tokenHandler = new JwtSecurityTokenHandler();
             return tokenHandler.WriteToken(token);
         }
 
-        private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials,
-            DateTime expiration) =>
-            new JwtSecurityToken(
+        private JwtSecurityToken CreateJwtToken(List<Claim> claims, SigningCredentials credentials, DateTime expiration)
+        {
+            return new JwtSecurityToken(
                 issuer: "Alba",
                 audience: "Adili",
                 expires: expiration,
                 claims: claims,
                 signingCredentials: credentials
             );
+        }
 
         private List<Claim> CreateClaims(IdentityUser user, IList<string> roles)
         {
-            try
+            var claims = new List<Claim>
             {
-                var claims = new List<Claim>
-                {
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(ClaimTypes.Name, user.UserName),
-                };
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+            };
 
-                foreach (var role in roles)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, role));
-                }
-
-                return claims;
-            }
-            catch (Exception e)
+            foreach (var role in roles)
             {
-                Console.WriteLine(e);
-                throw;
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
+
+            return claims;
         }
+
         private SigningCredentials CreateSigningCredentials()
         {
             return new SigningCredentials(
@@ -75,4 +73,3 @@ namespace The_Scouts.Services.AuthenticationService
         }
     }
 }
-
