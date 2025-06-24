@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api/axios'; // your configured axios instance
+import api from '../api/axios'; 
 
 export default function Register() {
   const [form, setForm] = useState({ email: '', password: '' });
