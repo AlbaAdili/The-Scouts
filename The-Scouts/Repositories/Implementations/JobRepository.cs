@@ -38,4 +38,13 @@ public class JobRepository : IJobRepository
             await _context.SaveChangesAsync();
         }
     }
+    public async Task<IEnumerable<Job>> SearchAsync(string query)
+    {
+        return await _context.Jobs
+            .Where(j => j.JobTitle.Contains(query) ||
+                        j.City.Contains(query) ||
+                        j.Country.Contains(query))
+            .ToListAsync();
+    }
+
 }

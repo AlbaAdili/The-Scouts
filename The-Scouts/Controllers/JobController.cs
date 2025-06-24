@@ -104,5 +104,17 @@ namespace The_Scouts.Controllers
             _cache.Remove($"job_{id}");
             return Ok("Job deleted successfully");
         }
+        
+   
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<JobDto>>> SearchJobs([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Search query is required.");
+
+            var results = await _jobService.SearchAsync(query);
+            return Ok(results);
+        }
+
     }
 }

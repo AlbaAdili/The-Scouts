@@ -46,4 +46,23 @@ public class JobService : IJobService
     {
         await _repository.DeleteAsync(id);
     }
+    public async Task<IEnumerable<JobDto>> SearchAsync(string query)
+    {
+        var allJobs = await _repository.GetAllAsync(); 
+        var filtered = allJobs.Where(j =>
+            (!string.IsNullOrEmpty(j.JobTitle) && j.JobTitle.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+            (!string.IsNullOrEmpty(j.City) && j.City.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
+            (!string.IsNullOrEmpty(j.Country) && j.Country.Contains(query, StringComparison.OrdinalIgnoreCase))
+        );
+
+        return filtered.Select(j => new JobDto
+        {
+            Id = j.Id,
+            JobTitle = j.JobTitle,
+            City = j.City,
+            Country = j.Country,
+            JobDescription = j.JobDescription
+        });
+    }
+
 }

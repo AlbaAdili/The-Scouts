@@ -9,5 +9,7 @@ public interface IJobService
     Task AddAsync(JobDto dto);
     Task UpdateAsync(int id, JobDto dto);
     Task DeleteAsync(int id);
+    Task<IEnumerable<JobDto>> SearchAsync(string query);
+
 }
 
