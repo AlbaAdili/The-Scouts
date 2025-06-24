@@ -56,6 +56,13 @@ export default function Login() {
           className="w-full p-2 border rounded"
           required
         />
+        <input
+          type="checkbox"
+          name="rememberMe"
+          checked={form.rememberMe}
+          onChange={(e) => setForm({ ...form, rememberMe: e.target.checked })}
+        /> Remember Me
+
 
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600">
           Login

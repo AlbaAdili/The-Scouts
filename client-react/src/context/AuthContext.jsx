@@ -15,6 +15,11 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+const logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("roles");
+  navigate("/login");
+};
 
 export function useAuth() {
   return useContext(AuthContext);

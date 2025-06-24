@@ -1,27 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios';
-import { getUserRole } from '../api/auth'; // your current getUserRole()
+import { getUserRole } from '../api/auth';
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const role = getUserRole(); // This will return 'Admin' or 'User'
+  const [searchTerm, setSearchTerm] = useState('');
+  const role = getUserRole(); // "Admin" or "User"
 
   useEffect(() => {
-    api.get('/job')
-      .then(res => setJobs(res.data))
-      .catch(err => console.error('Error fetching jobs:', err))
-      .finally(() => setLoading(false));
+    fetchJobs();
   }, []);
 
-  const handleDelete = async (id) => {
-  if (window.confirm("Are you sure you want to delete this job?")) {
-    await api.delete(`/job/${id}`);
-    setJobs(jobs.filter(job => job.id !== id));
-  }
-};
+  const fetchJobs = async () => {
+    try {
+      const res = await api.get('/job');
+      setJobs(res.data);
+    } catch (err) {
+      console.error('Error fetching jobs:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this job?")) {
+      await api.delete(`/job/${id}`);
+      setJobs(jobs.filter(job => job.id !== id));
+    }
+  };
+
+  const searchJobs = async () => {
+    try {
+      const res = await api.get(`/job/search?query=${searchTerm}`);
+      setJobs(res.data);
+    } catch (error) {
+      console.error('Error searching jobs', error);
+    }
+  };
 
   if (loading) return <p className="text-center mt-10">Loading jobs...</p>;
 
@@ -33,11 +50,21 @@ export default function Jobs() {
         <div className="flex justify-between mb-4 flex-col sm:flex-row gap-4">
           <Link to="/jobs/new" className="px-4 py-2 bg-black text-white rounded text-sm">Add Position</Link>
 
-          <input
-            type="text"
-            placeholder="Search Position"
-            className="border px-3 py-2 rounded w-full sm:w-auto"
-          />
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search Position"
+              className="border px-3 py-2 rounded w-full sm:w-auto"
+            />
+            <button
+              onClick={searchJobs}
+              className="px-4 py-2 bg-blue-600 text-white rounded text-sm"
+            >
+              Search
+            </button>
+          </div>
         </div>
       )}
 
@@ -61,13 +88,9 @@ export default function Jobs() {
                 </td>
                 {role === 'Admin' && (
                   <td className="p-3 space-x-2">
-                    {role === 'Admin' && (
-                        <td className="p-3 space-x-2">
-                            <Link to={`/jobs/edit/${job.id}`} className="px-3 py-1 bg-blue-500 text-white rounded">Edit</Link>
-                            <button onClick={() => handleDelete(job.id)} className="px-3 py-1 bg-red-500 text-white rounded">Delete</button>
-                            <Link to={`/applications/${job.id}`} className="px-3 py-1 bg-gray-500 text-white rounded">Applications</Link>
-                        </td>
-                        )}
+                    <Link to={`/jobs/edit/${job.id}`} className="px-3 py-1 bg-blue-500 text-white rounded">Edit</Link>
+                    <button onClick={() => handleDelete(job.id)} className="px-3 py-1 bg-red-500 text-white rounded">Delete</button>
+                    <Link to={`/applications/${job.id}`} className="px-3 py-1 bg-gray-500 text-white rounded">Applications</Link>
                   </td>
                 )}
               </tr>
