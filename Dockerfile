@@ -1,29 +1,22 @@
-﻿# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+WORKDIR /app
 
 # Copy solution and project files
-COPY The-Scouts.sln ./
+COPY The-Scouts.sln .
 COPY The-Scouts/The-Scouts.csproj ./The-Scouts/
 
-# Restore dependencies
-RUN dotnet restore The-Scouts.sln
+RUN dotnet restore
 
-# Copy the rest of the project files
+# Copy everything else and build
 COPY . .
-
-# Publish the application
-WORKDIR /src/The-Scouts
+WORKDIR /app/The-Scouts
 RUN dotnet publish -c Release -o /app/publish
 
-# Runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
-# Set environment variables
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
-# Run the application
 ENTRYPOINT ["dotnet", "The-Scouts.dll"]
