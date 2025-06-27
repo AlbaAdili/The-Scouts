@@ -11,7 +11,7 @@ const Home = () => {
     const loadJobs = async () => {
       try {
         const data = await fetchJobs();
-        console.log("Fetched jobs:", data); // 👀 Check the console
+        console.log("Fetched jobs:", data); 
         setJobs(data);
       } catch (error) {
         console.error("Error fetching jobs:", error);

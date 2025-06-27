@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@ namespace The_Scouts.Controllers
             _environment = environment;
         }
 
-
+        // Submit new application
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> SubmitApplication([FromForm] ApplicationDto dto)
@@ -53,17 +54,16 @@ namespace The_Scouts.Controllers
 
             if (dto.Resume == null || dto.Resume.Length == 0)
                 return BadRequest("Resume file is required.");
-            
+
             var allowedExtensions = new[] { ".pdf", ".docx" };
             var ext = Path.GetExtension(dto.Resume.FileName).ToLower();
 
             if (!allowedExtensions.Contains(ext))
                 return BadRequest("Only PDF and DOCX files are allowed.");
-            
+
             if (dto.Resume.Length > 5 * 1024 * 1024)
                 return BadRequest("Resume size must be under 5MB.");
 
-            // Save file under wwwroot/Resumes
             var uploadsFolder = Path.Combine(_environment.WebRootPath, "Resumes");
             Directory.CreateDirectory(uploadsFolder);
 
@@ -76,14 +76,14 @@ namespace The_Scouts.Controllers
             }
 
             await _applicationService.AddAsync(dto, user.Id, filePath);
-            _cache.Remove(_cacheKey); 
+            _cache.Remove(_cacheKey);
 
             return Ok("Application submitted successfully.");
         }
-    
 
+        // Get all applications (Admin)
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> GetAllApplications()
         {
             if (!_cache.TryGetValue(_cacheKey, out IEnumerable<ApplicationDto> applications))
@@ -102,8 +102,9 @@ namespace The_Scouts.Controllers
             return Ok(applications);
         }
 
+        // Get application by ID
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> GetById(int id)
         {
             var application = await _applicationService.FindOneAsync(id);
@@ -113,23 +114,50 @@ namespace The_Scouts.Controllers
             return Ok(application);
         }
 
-        [HttpGet("user")]
+        // Get all applications of logged-in user
+        [HttpGet("user/applications")]
         [Authorize]
-        public async Task<IActionResult> GetByUser()
+        public async Task<IActionResult> GetUserApplications()
         {
             var email = User.FindFirstValue(ClaimTypes.Name);
             if (string.IsNullOrEmpty(email))
                 return Unauthorized();
 
-            var application = await _applicationService.FindByUserEmailAsync(email);
-            if (application == null)
-                return NotFound();
-
-            return Ok(application);
+            var applications = await _applicationService.FindApplicationsByUserEmailAsync(email);
+            return Ok(applications);
         }
 
+        // Get all applications for a specific job position
+        [HttpGet("position/{positionId}")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public async Task<IActionResult> GetApplicationsForPosition(int positionId)
+        {
+            var applications = await _applicationService.FindApplicationsAsync(positionId);
+            return Ok(applications);
+        }
+
+        // Search applications by name or surname
+        [HttpGet("search")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
+        public async Task<IActionResult> SearchApplications([FromQuery] string searchTerm)
+        {
+            var applications = await _applicationService.GetAllAsync();
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                applications = applications
+                    .Where(app =>
+                        app.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                        app.Surname.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return Ok(applications);
+        }
+
+        // Update status of application
         [HttpPut("{id}/status")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperAdmin")]
         public async Task<IActionResult> UpdateStatus(int id, [FromQuery] string status)
         {
             var updated = await _applicationService.UpdateStatusAsync(id, status);

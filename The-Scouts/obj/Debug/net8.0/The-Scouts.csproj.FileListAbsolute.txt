@@ -113,6 +113,8 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.csproj.CoreCompileInputs.cache
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.MvcApplicationPartsAssemblyInfo.cs
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.MvcApplicationPartsAssemblyInfo.cache
+/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.RazorAssemblyInfo.cache
+/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.RazorAssemblyInfo.cs
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.sourcelink.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/staticwebassets.build.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/staticwebassets.development.json
@@ -121,7 +123,9 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.The-Scouts.props
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.The-Scouts.props
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/staticwebassets.pack.json
+/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/scopedcss/bundle/The-Scouts.styles.css
+/Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/scopedcss/projectbundle/The-Scouts.bundle.scp.css
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.csproj.Up2Date
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/The-Scouts.dll
 /Users/alba/Desktop/GitHub/The-Scouts/The-Scouts/obj/Debug/net8.0/refint/The-Scouts.dll

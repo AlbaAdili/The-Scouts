@@ -1,10 +1,4 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/CoverletSourceRootsMapping_The-ScoutsTests
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.csproj.AssemblyReference.cache
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.GeneratedMSBuildEditorConfig.editorconfig
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.AssemblyInfoInputs.cache
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.AssemblyInfo.cs
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.csproj.CoreCompileInputs.cache
-/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.sourcelink.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/The-Scouts.deps.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/The-Scouts.runtimeconfig.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/appsettings.Development.json
@@ -141,6 +135,12 @@
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/The-Scouts.dll
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/bin/Debug/net8.0/The-Scouts.pdb
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.csproj.AssemblyReference.cache
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.GeneratedMSBuildEditorConfig.editorconfig
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.AssemblyInfoInputs.cache
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.AssemblyInfo.cs
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.csproj.CoreCompileInputs.cache
+/Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.sourcelink.json
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-Scou.D660A7D4.Up2Date
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/The-ScoutsTests.dll
 /Users/alba/Desktop/GitHub/The-Scouts/The-ScoutsTests/obj/Debug/net8.0/refint/The-ScoutsTests.dll

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using The_Scouts.Models;
 
 
+
 namespace TheScouts.Data
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
@@ -16,6 +17,8 @@ namespace TheScouts.Data
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<ContactMessage> ContactMessages { get; set; }
+        
+        public DbSet<Newsletter> Newsletters { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

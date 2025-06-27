@@ -9,7 +9,7 @@ namespace The_Scouts.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class JobController : ControllerBase
+    public class JobController : Controller
     {
         private readonly IJobService _jobService;
         private readonly IMemoryCache _cache;
@@ -40,7 +40,7 @@ namespace The_Scouts.Controllers
 
             return Ok(jobs);
         }
-
+        
         [HttpGet("{id}")]
         public async Task<ActionResult<JobDto>> GetJobById(int id)
         {
@@ -107,14 +107,27 @@ namespace The_Scouts.Controllers
         
    
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<JobDto>>> SearchJobs([FromQuery] string query)
+        public async Task<ActionResult<IEnumerable<JobDto>>> SearchJobs([FromQuery] string searchTerm, [FromQuery] string category)
         {
-            if (string.IsNullOrWhiteSpace(query))
-                return BadRequest("Search query is required.");
+            var allJobs = await _jobService.GetAllAsync();
 
-            var results = await _jobService.SearchAsync(query);
-            return Ok(results);
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                allJobs = allJobs
+                    .Where(job => job.JobTitle.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            if (!string.IsNullOrWhiteSpace(category) && category.ToLower() != "all")
+            {
+                allJobs = allJobs
+                    .Where(job => job.Country.Equals(category, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+
+            return Ok(allJobs);
         }
+
 
     }
 }

@@ -9,5 +9,6 @@ public interface IJobRepository
     Task AddAsync(Job job);
     Task UpdateAsync(Job job);
     Task DeleteAsync(int id);
-    Task<IEnumerable<Job>> SearchAsync(string query);
+    Task<IEnumerable<Job>> SearchAsync(string searchTerm, string category);
+
 }

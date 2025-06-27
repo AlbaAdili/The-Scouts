@@ -31,13 +31,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\resumes\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Include="Views\.DS_Store" />
+      <Content Include="wwwroot\.DS_Store" />
     </ItemGroup>
 
 </Project>

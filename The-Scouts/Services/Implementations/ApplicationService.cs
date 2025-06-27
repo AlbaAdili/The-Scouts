@@ -49,4 +49,30 @@ public class ApplicationService : IApplicationService
     {
         return await _repository.UpdateStatusAsync(applicationId, status);
     }
+    public async Task<IEnumerable<ApplicationDto>> SearchAsync(string searchTerm)
+    {
+        var apps = await _repository.GetAllAsync();
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return _mapper.Map<IEnumerable<ApplicationDto>>(apps);
+
+        var filtered = apps.Where(a =>
+            a.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            a.Surname.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+        );
+
+        return _mapper.Map<IEnumerable<ApplicationDto>>(filtered);
+    }
+    public async Task<IEnumerable<ApplicationDto>> FindApplicationsByUserEmailAsync(string email)
+    {
+        var apps = await _repository.FindByUserEmailAsync(email);
+        return _mapper.Map<IEnumerable<ApplicationDto>>(apps);
+    }
+
+    public async Task<IEnumerable<ApplicationDto>> FindApplicationsAsync(int positionId)
+    {
+        var apps = await _repository.FindByPositionIdAsync(positionId);
+        return _mapper.Map<IEnumerable<ApplicationDto>>(apps);
+    }
+
+
 }

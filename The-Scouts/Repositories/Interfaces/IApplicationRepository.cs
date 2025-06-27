@@ -9,4 +9,8 @@ public interface IApplicationRepository
     Task<IEnumerable<Application>> FindByUserIdAsync(string userId);
     Task AddAsync(Application application);
     Task<Application?> UpdateStatusAsync(int applicationId, string status);
+    Task<IEnumerable<Application>> FindByUserEmailAsync(string email);
+    Task<IEnumerable<Application>> FindByPositionIdAsync(int positionId);
+
+    Task<IEnumerable<Application>> SearchAsync(string searchTerm);
 }

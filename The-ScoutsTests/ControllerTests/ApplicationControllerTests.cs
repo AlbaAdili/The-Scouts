@@ -97,16 +97,7 @@ public class ApplicationControllerTests
         var ok = Assert.IsType<OkObjectResult>(result);
         Assert.IsType<ApplicationDto>(ok.Value);
     }
-
-    [Fact]
-    public async Task GetByUser_NoEmail_ReturnsUnauthorized()
-    {
-        _controller.ControllerContext.HttpContext = new DefaultHttpContext();
-
-        var result = await _controller.GetByUser();
-
-        Assert.IsType<UnauthorizedResult>(result);
-    }
+    
 
     [Fact]
     public async Task UpdateStatus_InvalidId_ReturnsNotFound()

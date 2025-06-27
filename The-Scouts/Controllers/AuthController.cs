@@ -22,7 +22,7 @@ namespace The_Scouts.Controllers
             _context = context;
             _tokenService = tokenService;
         }
-
+        
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegistrationRequestDTO request)
         {

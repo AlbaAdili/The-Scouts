@@ -5,6 +5,7 @@ namespace The_Scouts.Models;
 
 public class Job
 {
+    [Key]
     public int Id { get; set; }
     
     [Required]

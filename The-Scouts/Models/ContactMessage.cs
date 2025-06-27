@@ -9,8 +9,10 @@ public class ContactMessage
     [Required]
     public string Name { get; set; }
 
-    [Required]
-    [EmailAddress]
+  
+    [Required(ErrorMessage = "Email is required.")]
+    [Display(Name = "Email")]
+    [DataType(DataType.EmailAddress)]
     public string Email { get; set; }
 
     [Required]

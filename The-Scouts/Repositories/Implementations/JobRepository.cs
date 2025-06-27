@@ -38,13 +38,22 @@ public class JobRepository : IJobRepository
             await _context.SaveChangesAsync();
         }
     }
-    public async Task<IEnumerable<Job>> SearchAsync(string query)
+    public async Task<IEnumerable<Job>> SearchAsync(string searchTerm, string category)
     {
-        return await _context.Jobs
-            .Where(j => j.JobTitle.Contains(query) ||
-                        j.City.Contains(query) ||
-                        j.Country.Contains(query))
-            .ToListAsync();
+        var query = _context.Jobs.AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            query = query.Where(j => j.JobTitle.ToLower().Contains(searchTerm.ToLower()));
+        }
+
+        if (!string.IsNullOrWhiteSpace(category) && category.ToLower() != "all")
+        {
+            query = query.Where(j => j.Country.ToLower() == category.ToLower());
+        }
+
+        return await query.ToListAsync();
     }
+
 
 }

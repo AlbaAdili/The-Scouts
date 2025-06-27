@@ -9,7 +9,7 @@ namespace The_Scouts.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ContactController : ControllerBase
+    public class ContactController : Controller
     {
         private readonly IContactService _contactService;
         private readonly IMemoryCache _cache;

@@ -43,4 +43,29 @@ public class ApplicationRepository : IApplicationRepository
 
         return null;
     }
+    public async Task<IEnumerable<Application>> FindByUserEmailAsync(string email)
+    {
+        return await _context.Applications
+            .Include(a => a.Job)
+            .Where(a => a.Email == email)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Application>> FindByPositionIdAsync(int positionId)
+    {
+        return await _context.Applications
+            .Include(a => a.Job)
+            .Where(a => a.JobId == positionId)
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<Application>> SearchAsync(string searchTerm)
+    {
+        return await _context.Applications
+            .Where(a => a.Name.ToLower().Contains(searchTerm.ToLower()) ||
+                        a.Surname.ToLower().Contains(searchTerm.ToLower()))
+            .Include(a => a.Job)
+            .ToListAsync();
+    }
+
 }
