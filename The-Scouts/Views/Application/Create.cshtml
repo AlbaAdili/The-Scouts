@@ -1,0 +1,70 @@
+﻿<!-- Create.cshtml -->
+@{
+    ViewData["Title"] = "Apply";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jobTitle = ViewData["JobTitle"] as string;
+    var location = ViewData["Location"] as string;
+}
+
+<div class="d-flex justify-content-center my-5">
+    <h1 class="display-5">Open Position</h1>
+</div>
+<h1 class="my-5 display-6 details-title">Apply for @jobTitle in @location</h1>
+<div class="d-flex justify-content-between">
+    <form id="applicationForm" class="apply-form" enctype="multipart/form-data" autocomplete="off">
+        <div class="form-content">
+            <label for="Name" class="control-label">Name</label>
+            <input type="text" id="Name" name="Name" class="form-control" placeholder="Enter Name" required />
+        </div>
+        <div class="form-content">
+            <label for="Surname" class="control-label">Surname</label>
+            <input type="text" id="Surname" name="Surname" class="form-control" placeholder="Enter Surname" required />
+        </div>
+        <div class="form-content">
+            <label for="Email" class="control-label">Email</label>
+            <input type="email" id="Email" name="Email" class="form-control" placeholder="name@example.com" required />
+        </div>
+        <div class="form-content">
+            <label for="PhoneNumber" class="control-label">Phone Number</label>
+            <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="+383 (045) 226 208" required />
+        </div>
+        <div class="form-content">
+            <label for="Resume" class="control-label">Resume (PDF or DOCX)</label>
+            <input type="file" id="Resume" name="Resume" required />
+        </div>
+        <input type="hidden" id="JobId" name="JobId" value="@ViewBag.JobId" />
+        <button type="submit" class="btn button-primary mt-1">Apply</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("applicationForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const form = new FormData();
+        form.append("Name", document.getElementById("Name").value);
+        form.append("Surname", document.getElementById("Surname").value);
+        form.append("Email", document.getElementById("Email").value);
+        form.append("PhoneNumber", document.getElementById("PhoneNumber").value);
+        form.append("JobId", document.getElementById("JobId").value);
+        form.append("Resume", document.getElementById("Resume").files[0]);
+
+        const token = localStorage.getItem("token");
+
+        const response = await fetch("/api/application", {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            body: form
+        });
+
+        if (response.ok) {
+            alert("Application submitted successfully!");
+            window.location.href = "/Home";
+        } else {
+            const error = await response.text();
+            alert("Failed: " + error);
+        }
+    });
+</script>

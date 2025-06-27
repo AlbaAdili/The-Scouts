@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<form id="loginForm" class="position-form">
+    <h2 class="display-6">Login</h2>
+
+    <div class="form-content">
+        <label for="Email" class="control-label">Email</label>
+        <input id="Email" name="Email" class="form-control" placeholder="name@example.com" required />
+    </div>
+
+    <div class="form-content">
+        <label for="Password" class="control-label">Password</label>
+        <input id="Password" type="password" name="Password" class="form-control" placeholder="Enter Password" required />
+    </div>
+
+    <div class="form-content">
+        <input type="checkbox" id="RememberMe" class="form-check-input" />
+        <label for="RememberMe" class="form-check-label">Remember Me</label>
+    </div>
+
+    <button type="submit" class="btn button-primary">Login</button>
+
+    <div class="form-content">
+        <p>Don't have an account? <a href="/Account/Register" style="text-decoration: none;">Register</a></p>
+    </div>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        if (!form) return;
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById("Email").value;
+            const password = document.getElementById("Password").value;
+            const rememberMe = document.getElementById("RememberMe").checked;
+
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password, rememberMe })
+            });
+
+            let result;
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.includes("application/json")) {
+                result = await response.json();
+            } else {
+                result = await response.text();
+            }
+
+            if (response.ok) {
+                localStorage.setItem("token", result.token);
+                localStorage.setItem("role", result.role);
+                localStorage.setItem("email", result.email);
+                window.location.href = "/Home"; // or wherever you want to go
+            } else {
+                alert(result || "Login failed");
+            }
+        });
+    });
+</script>

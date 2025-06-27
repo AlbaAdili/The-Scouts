@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="d-flex justify-content-center my-5">
+    <h1 class="display-5">My Applications</h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table jobs-table text-white">
+        <thead>
+        <tr>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Resume</th>
+        </tr>
+        </thead>
+        <tbody id="applicationsBody"></tbody>
+    </table>
+</div>
+
+<script>
+    async function loadApplications() {
+        const token = localStorage.getItem("token");
+        const response = await fetch("/api/application/user", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const tbody = document.getElementById("applicationsBody");
+        tbody.innerHTML = "";
+
+        if (response.ok) {
+            const data = await response.json();
+            for (const application of data) {
+                const row = `<tr>
+                    <td>${application.job?.jobTitle} in ${application.job?.city}, ${application.job?.country}</td>
+                    <td>${application.status}</td>
+                    <td>
+                        ${application.resumePath
+                            ? `<a href="${application.resumePath}" target="_blank" class="btn button-secondary">Open</a>`
+                            : "No resume"}
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            }
+        } else {
+            tbody.innerHTML = `<tr><td colspan="3">No applications found.</td></tr>`;
+        }
+    }
+
+    loadApplications();
+</script>

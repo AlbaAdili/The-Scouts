@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "All Applications";
+}
+
+<div class="d-flex justify-content-center my-5">
+    <h1 class="display-5">All Applications</h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table jobs-table text-white">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Job</th>
+            <th>Status</th>
+            <th>Resume</th>
+        </tr>
+        </thead>
+        <tbody id="adminApplicationsBody"></tbody>
+    </table>
+</div>
+
+<script>
+    async function loadAllApplications() {
+        const token = localStorage.getItem("token");
+        const response = await fetch("/api/application", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const tbody = document.getElementById("adminApplicationsBody");
+        tbody.innerHTML = "";
+
+        if (response.ok) {
+            const data = await response.json();
+            for (const application of data) {
+                const row = `<tr>
+                    <td>${application.name} ${application.surname}</td>
+                    <td>${application.email}</td>
+                    <td>${application.phoneNumber || "-"}</td>
+                    <td>${application.job?.jobTitle} in ${application.job?.city}, ${application.job?.country}</td>
+                    <td>
+                        <select class="statusDropdown" data-id="${application.id}">
+                            <option ${application.status === 'Submitted' ? 'selected' : ''}>Submitted</option>
+                            <option ${application.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                            <option ${application.status === 'Scheduled' ? 'selected' : ''}>Scheduled</option>
+                            <option ${application.status === 'Decision Pending' ? 'selected' : ''}>Decision Pending</option>
+                            <option ${application.status === 'Finalized' ? 'selected' : ''}>Finalized</option>
+                        </select>
+                    </td>
+                    <td>
+                        ${application.resumePath
+                    ? `<a href="${application.resumePath}" class="btn button-secondary" target="_blank">Open</a>
+                               <a href="${application.resumePath}" class="btn button-secondary ml-2" download>Download</a>`
+                    : "No resume"}
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            }
+        } else {
+            tbody.innerHTML = `<tr><td colspan="6">No applications found.</td></tr>`;
+        }
+    }
+
+    document.addEventListener("change", async function (e) {
+        if (e.target.classList.contains("statusDropdown")) {
+            const applicationId = e.target.dataset.id;
+            const newStatus = e.target.value;
+
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`/api/application/${applicationId}/status?status=${encodeURIComponent(newStatus)}`, {
+                method: "PUT",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                alert("Failed to update status");
+            }
+        }
+    });
+
+    loadAllApplications();
+</script>

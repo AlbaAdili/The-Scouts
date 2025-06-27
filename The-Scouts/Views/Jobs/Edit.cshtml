@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Edit Position";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Position</h2>
+
+<form id="editForm" class="position-form">
+    <input type="hidden" id="jobId" />
+
+    <div class="form-content">
+        <label for="Country" class="control-label">Country</label>
+        <input type="text" id="Country" class="form-control" placeholder="Enter Country" required />
+    </div>
+    <div class="form-content">
+        <label for="City" class="control-label">City</label>
+        <input type="text" id="City" class="form-control" placeholder="Enter City" required />
+    </div>
+    <div class="form-content">
+        <label for="JobTitle" class="control-label">Job Title</label>
+        <input type="text" id="JobTitle" class="form-control" placeholder="Enter Job Title" required />
+    </div>
+    <div class="form-content">
+        <label for="JobDescription" class="control-label">Job Description</label>
+        <textarea id="JobDescription" class="form-control autosize" placeholder="Enter Job Description" required></textarea>
+    </div>
+    <button type="submit" class="btn button-primary">Save Changes</button>
+</form>
+
+<script>
+    async function loadJob() {
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        if (!id) return;
+
+        document.getElementById("jobId").value = id;
+
+        const response = await fetch(`/api/job/${id}`);
+        if (response.ok) {
+            const job = await response.json();
+            document.getElementById("Country").value = job.country;
+            document.getElementById("City").value = job.city;
+            document.getElementById("JobTitle").value = job.jobTitle;
+            document.getElementById("JobDescription").value = job.jobDescription;
+        } else {
+            alert("Failed to load job details.");
+        }
+    }
+
+    document.getElementById("editForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const id = document.getElementById("jobId").value;
+
+        const jobDto = {
+            id: parseInt(id),
+            country: document.getElementById("Country").value,
+            city: document.getElementById("City").value,
+            jobTitle: document.getElementById("JobTitle").value,
+            jobDescription: document.getElementById("JobDescription").value
+        };
+
+        const token = localStorage.getItem("token");
+
+        const response = await fetch(`/api/job/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify(jobDto)
+        });
+
+        if (response.ok) {
+            alert("Job updated successfully!");
+            window.location.href = "/Jobs";
+        } else {
+            const error = await response.text();
+            alert("Update failed: " + error);
+        }
+    });
+
+    loadJob();
+</script>

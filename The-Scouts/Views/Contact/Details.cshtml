@@ -1,0 +1,20 @@
+﻿@model The_Scouts.Models.ContactMessage
+
+@{
+    ViewData["Title"] = "Contact Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="display-6 my-5">Contact Details</h2>
+
+<div>
+    <p class="mb-0" style="font-size: 30px;">@Model.Name</p>
+    <p style="font-size: 16px;">@Model.Email</p>
+    <p class="text-muted mt-2">Sent on: @Model.SentAt.ToLocalTime().ToString("f")</p>
+    <hr />
+    <p class="mt-4">@Model.Description</p>
+</div>
+
+<div class="mt-4">
+    @Html.ActionLink("← Back to Messages", "Index", "Contact", null, new { @class = "btn btn-secondary" })
+</div>

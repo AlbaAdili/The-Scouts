@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Position Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex justify-content-center my-5">
+    <h1 class="display-5">Open Position</h1>
+</div>
+
+<div class="details-container">
+    <p class="display-6 details-title" id="jobTitle"></p>
+    <p class="details-description" id="jobDescription"></p>
+</div>
+
+<div class="my-5">
+    <a id="applyButton" class="btn button-primary">Apply Online</a>
+</div>
+
+<script>
+    async function loadJobDetails() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobId = urlParams.get("id");
+
+        if (!jobId) {
+            document.body.innerHTML = "<p>Job not found.</p>";
+            return;
+        }
+
+        const response = await fetch(`/api/job/${jobId}`);
+        if (!response.ok) {
+            document.body.innerHTML = "<p>Failed to load job details.</p>";
+            return;
+        }
+
+        const job = await response.json();
+
+        document.getElementById("jobTitle").textContent = `${job.jobTitle} in ${job.city}, ${job.country}`;
+        document.getElementById("jobDescription").textContent = job.jobDescription;
+
+        const applyUrl = `/Application/Create?jobId=${job.id}`;
+        document.getElementById("applyButton").href = applyUrl;
+    }
+
+    loadJobDetails();
+</script>

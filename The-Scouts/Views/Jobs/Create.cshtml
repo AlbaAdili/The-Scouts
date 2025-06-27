@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Add Position";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Add Position</h2>
+
+<form id="jobForm" class="position-form">
+    <div class="form-content">
+        <label for="country" class="control-label">Country</label>
+        <input type="text" id="country" class="form-control" placeholder="Enter Country" required />
+    </div>
+    <div class="form-content">
+        <label for="city" class="control-label">City</label>
+        <input type="text" id="city" class="form-control" placeholder="Enter City" required />
+    </div>
+    <div class="form-content">
+        <label for="jobTitle" class="control-label">Job Title</label>
+        <input type="text" id="jobTitle" class="form-control" placeholder="Enter Job Title" required />
+    </div>
+    <div class="form-content">
+        <label for="jobDescription" class="control-label">Job Description</label>
+        <textarea id="jobDescription" class="form-control autosize" placeholder="Enter Job Description" required></textarea>
+    </div>
+    <button type="submit" class="btn button-primary">Add</button>
+</form>
+
+<script>
+    document.getElementById("jobForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem("token");
+
+        const job = {
+            country: document.getElementById("country").value,
+            city: document.getElementById("city").value,
+            jobTitle: document.getElementById("jobTitle").value,
+            jobDescription: document.getElementById("jobDescription").value
+        };
+
+        const response = await fetch("/api/job", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(job)
+        });
+
+        if (response.ok) {
+            alert("Job added successfully!");
+            window.location.href = "/Jobs"; // or wherever your job list is
+        } else {
+            const error = await response.text();
+            alert("Failed to add job: " + error);
+        }
+    });
+</script>
