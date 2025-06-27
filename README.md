@@ -6,7 +6,6 @@
 
 The primary goal is to bridge the gap between candidates seeking academic or professional positions and institutions looking for qualified individuals, while also supporting academic paper submission workflows.
 
----
 
 ## Objectives
 
@@ -16,7 +15,6 @@ The primary goal is to bridge the gap between candidates seeking academic or pro
 - Enhance accessibility, security, and usability across all user interactions.
 - Improve transparency and reduce administrative overhead in recruitment.
 
----
 
 ## Technologies and Tools
 
